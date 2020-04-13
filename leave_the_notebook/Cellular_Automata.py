@@ -8,22 +8,22 @@ def neighborhoods():
     return [(0,0), (0,1), (0,2), (1,0), (1,1), (1,2), (2,0), (2,1),(2,2)]
 
 def ternary(n):
-    a=[0,1,2]
-    b=[]
+    a = [0,1,2]
+    b = []
     while True:
-        s=n//3
-        y=n%3
-        b=b+[y]
-        if s==0:
+        s = n//3
+        y = n%3
+        b = b+[y]
+        if s == 0:
             break
-        n=s
+        n = s
     return b
 
 def internary(rule_number):
     in_ternary=ternary(rule_number)
     ternary_length = len(in_ternary)
     if ternary_length != 9:
-        padding = 9 - ternary_length
+        padding = 9-ternary_length
         in_ternary = in_ternary + [0]*padding
     return in_ternary
 
@@ -32,14 +32,16 @@ def spacetime_diagram(spacetime_field, size=12, colors=plt.cm.Greys):
     plt.imshow(spacetime_field, cmap=colors, interpolation='nearest')
     plt.show()
 
+    
 class ECA(object):
+    
     def __init__(self, initial_condition):
-                
         self.initial = initial_condition
         self.spacetime = [initial_condition]
         self.current_configuration = initial_condition.copy()
         self._length = len(initial_condition)
 
+        
     def evolve(self, time_steps, in_ternary):
         lookup = dict(zip(neighborhoods(), reversed(in_ternary)))
         length = len(self.initial)
